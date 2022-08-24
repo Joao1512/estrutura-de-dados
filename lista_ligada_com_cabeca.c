@@ -22,7 +22,7 @@ typedef struct {
 
 int tamanho(LISTA* l) {
     int tamanho = 0;
-    ELEMENTO* elementoValido = l->cabeca; // elementoValido guarda o endereço de um ELEMENTO;
+    ELEMENTO* elementoValido = l->cabeca; // elementoValido inicialmente guarda o endereço do primeiro elemento da lista;
     while (elementoValido != NULL) {
         tamanho++;
         elementoValido = elementoValido->prox;
@@ -32,10 +32,17 @@ int tamanho(LISTA* l) {
 
 void exibir(LISTA* l) {
     ELEMENTO* elementoValido = l->cabeca;
-    while (elementoValido != NULL) {
-        printf("%i \n", elementoValido->registro.chave);
-        elementoValido = elementoValido->prox;
+    int index = 0;
+    if (elementoValido != NULL) {
+        printf("[");
+        while (elementoValido != NULL) {
+            printf("%i, ", elementoValido->registro.chave);
+            elementoValido = elementoValido->prox;
+            index++;
+        }
+        printf("]");
     }
+
 }
 
 ELEMENTO* buscaSequencial(LISTA* l, CHAVE chave) {
@@ -56,7 +63,6 @@ void inserirInicio(LISTA* l, CHAVE chave) {
     l->cabeca = novoElemento;
 };
 
-int main() {
 
 void inserirFinal(LISTA* l, CHAVE chave) {
     ELEMENTO* novoElemento = (ELEMENTO*) malloc(sizeof(ELEMENTO));
@@ -73,4 +79,13 @@ void inserirFinal(LISTA* l, CHAVE chave) {
         elementoValido->prox = novoElemento;
     }
 }
+
+int main() {
+    LISTA lista ;
+    inserirFinal(&lista, 1);
+    inserirFinal(&lista, 2);
+    inserirFinal(&lista, 3);
+    inserirInicio(&lista, 0);
+    exibir(&lista);
+    printf("tamanho: %i", tamanho(&lista));
 }
