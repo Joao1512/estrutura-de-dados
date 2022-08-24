@@ -38,15 +38,6 @@ void exibir(LISTA* l) {
     }
 }
 
-bool inserirFinal(LISTA* l, ELEMENTO novo) {
-    //TODO terminar
-//    ELEMENTO* elementoValido = l->cabeca;
-//    if (l->cabeca->prox == NULL) {
-//        l->cabeca->prox = &novo;
-//        novo.prox = NULL;
-//        return true;
-//    }
-//    while (elementoValido->prox)
 }
 
 void inserirInicio(LISTA* l, CHAVE chave) {
@@ -58,4 +49,19 @@ void inserirInicio(LISTA* l, CHAVE chave) {
 
 int main() {
 
+void inserirFinal(LISTA* l, CHAVE chave) {
+    ELEMENTO* novoElemento = (ELEMENTO*) malloc(sizeof(ELEMENTO));
+    novoElemento->registro.chave = chave;
+    novoElemento->prox = NULL;
+    if (l->cabeca == NULL) {
+        l->cabeca = novoElemento;
+    }
+    else {
+        ELEMENTO* elementoValido = l->cabeca;
+        while (elementoValido->prox != NULL) {
+            elementoValido = elementoValido->prox;
+        }
+        elementoValido->prox = novoElemento;
+    }
+}
 }
