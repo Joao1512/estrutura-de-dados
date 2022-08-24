@@ -49,6 +49,12 @@ bool inserirFinal(LISTA* l, ELEMENTO novo) {
 //    while (elementoValido->prox)
 }
 
+void inserirInicio(LISTA* l, CHAVE chave) {
+    ELEMENTO* novoElemento = (ELEMENTO*) malloc(sizeof(ELEMENTO));
+    novoElemento->registro.chave = chave;
+    novoElemento->prox = l->cabeca;
+    l->cabeca = novoElemento;
+};
 
 int main() {
 
