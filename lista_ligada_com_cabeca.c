@@ -88,4 +88,5 @@ int main() {
     inserirInicio(&lista, 0);
     exibir(&lista);
     printf("tamanho: %i", tamanho(&lista));
+    // Console output: [0, 1, 2, 3, ]tamanho: 4
 }
