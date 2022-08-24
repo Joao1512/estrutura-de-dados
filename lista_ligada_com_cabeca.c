@@ -38,6 +38,15 @@ void exibir(LISTA* l) {
     }
 }
 
+ELEMENTO* buscaSequencial(LISTA* l, CHAVE chave) {
+    ELEMENTO* elementoValido = l->cabeca;
+    while(elementoValido != NULL) {
+        if (elementoValido->registro.chave == chave) {
+            return elementoValido;
+        }
+        elementoValido = elementoValido->prox;
+    }
+    return NULL;
 }
 
 void inserirInicio(LISTA* l, CHAVE chave) {
