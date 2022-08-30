@@ -18,6 +18,7 @@ typedef struct aux {
 
 typedef struct {
  ELEMENTO *cabeca; // cabeca guarda o endereço de onde está uma estrutura do tipo ELEMENTO.
+ ELEMENTO *ultimo;
 } LISTA;
 
 int tamanho(LISTA* l) {
@@ -68,24 +69,25 @@ void inserirFinal(LISTA* l, CHAVE chave) {
     ELEMENTO* novoElemento = (ELEMENTO*) malloc(sizeof(ELEMENTO));
     novoElemento->registro.chave = chave;
     novoElemento->prox = NULL;
-    if (l->cabeca == NULL) {
+    if (l->cabeca == NULL) { // Caso ainda não existam elementos na lista
         l->cabeca = novoElemento;
+        l->ultimo = novoElemento; // O único elemento é o primeiro e o último ao mesmo tempo.
     }
     else {
-        ELEMENTO* elementoValido = l->cabeca;
-        while (elementoValido->prox != NULL) {
-            elementoValido = elementoValido->prox;
-        }
-        elementoValido->prox = novoElemento;
+        ELEMENTO* ultimo = l->ultimo;
+        ultimo->prox = novoElemento; // último elemento passa a apontar para o novo elemento
+        l->ultimo = novoElemento; // Salva a referência do novo último elemento
     }
 }
 
 int main() {
     LISTA lista ;
+    lista.cabeca = NULL;
+    lista.ultimo = NULL;
     inserirFinal(&lista, 1);
     inserirFinal(&lista, 2);
     inserirFinal(&lista, 3);
-    inserirInicio(&lista, 0);
+//    inserirInicio(&lista, 0);
     exibir(&lista);
     printf("tamanho: %i", tamanho(&lista));
     // Console output: [0, 1, 2, 3, ]tamanho: 4

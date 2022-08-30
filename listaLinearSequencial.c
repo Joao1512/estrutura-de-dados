@@ -75,9 +75,9 @@ void empurrarElementos(LISTA* lista, int posicao) {
 
 bool podeEmpurrar(LISTA* lista, int posicao) {
     if (posicao + 1 > TAMANHO) {
+        printf("Nao e possivel empurrar, espaco insuficiente \n");
         return false;
     }
-    printf("Nao e possivel empurrar, espaco insuficiente \n");
     return true;
 }
 
