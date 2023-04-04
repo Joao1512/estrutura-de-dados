@@ -80,7 +80,12 @@ bool podeEmpurrar(LISTA* lista, int posicao) {
     return true;
 }
 
-bool inserirElementosLista(LISTA* lista, ELEMENTO elemento, int posicao) {
+/*
+ * lista - ponteiro que aponta para uma LISTA.
+ * elemento - será inserido na LISTA.
+ * posicao - um int que determina em qual posicao da LISTA o elemento vai ser inserido.
+ */
+bool inserirElemento(LISTA* lista, ELEMENTO elemento, int posicao) {
     if (insercaoValida(lista, posicao) ) {
         if (espacoEstaOcupado(lista, posicao) && podeEmpurrar(lista, posicao)) {
             empurrarElementos(lista, posicao);
@@ -103,8 +108,6 @@ bool inserirElementosLista(LISTA* lista, ELEMENTO elemento, int posicao) {
     }
 }
 
-
-
 int main() {
     LISTA* lista1 = (LISTA*) malloc(sizeof(LISTA));
     limparElementosLista(lista1);
@@ -112,7 +115,7 @@ int main() {
         ELEMENTO elemento;
         elemento.chave = i;
         elemento.valor = i;
-        inserirElementosLista(lista1, elemento, 0);
+        inserirElemento(lista1, elemento, 0);
     }
     exibirElementosLista(lista1);
 }
