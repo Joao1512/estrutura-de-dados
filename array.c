@@ -3,7 +3,7 @@
 #include <stdbool.h>
 typedef int CHAVE;
 
-int TAMANHO = 3;
+int TAMANHO = 10;
 
 typedef struct {
     CHAVE chave;
@@ -27,11 +27,12 @@ void limparElementosLista(LISTA* lista) {
 
 void exibirElementosLista(LISTA* lista) {
     printf("Numero de elementos: %i \n", lista->qntdElementos);
-    for (int i = 0; i < 10; ++i) {
-
-        printf(" chave: %i", lista->A[i].chave);
-
+    for (int i = 0; i < lista->qntdElementos; ++i) {
+        printf(" indice: %i ", i);
+        printf(" chave: %i ", lista->A[i].chave);
         printf(" valor: %i \n", lista->A[i].valor);
+
+
     }
 }
 
@@ -56,8 +57,8 @@ bool espacoEstaOcupado(LISTA* lista, int posicao) {
 }
 
 bool insercaoValida(LISTA* lista, int posicao) {
-    if ((lista->qntdElementos == TAMANHO) || posicao < 0 || posicao >= TAMANHO) {
-        printf("Nao e possivel inserir elemento nesta posicao. \n");
+    if ((lista->qntdElementos >= TAMANHO) || posicao < 0 || posicao >= TAMANHO) {
+        printf("Nao e possivel inserir elemento na posicao %i. \n", posicao);
         return false;
     }
     else {
@@ -66,15 +67,13 @@ bool insercaoValida(LISTA* lista, int posicao) {
 }
 
 void empurrarElementos(LISTA* lista, int posicao) {
-    for (int j = lista->qntdElementos; j >= posicao; --j) {
-        lista->A[j + 1] = lista->A[j];
-         // qntdElementos = 1, j = 0 posicao = 0, tamanho = 3
-        //   "2", "1", "-1",
+    for (int j = lista->qntdElementos; j >= posicao; --j) { // a partir do último elemento, move cada elemento 1 casa a direita.
+        lista->A[j] = lista->A[j - 1];
     }
 }
 
 bool podeEmpurrar(LISTA* lista, int posicao) {
-    if (posicao + 1 > TAMANHO) {
+    if (lista->qntdElementos == TAMANHO) {
         printf("Nao e possivel empurrar, espaco insuficiente \n");
         return false;
     }
@@ -85,11 +84,19 @@ bool inserirElementosLista(LISTA* lista, ELEMENTO elemento, int posicao) {
     if (insercaoValida(lista, posicao) ) {
         if (espacoEstaOcupado(lista, posicao) && podeEmpurrar(lista, posicao)) {
             empurrarElementos(lista, posicao);
+            lista->A[posicao] = elemento;
+            lista->qntdElementos++;
+            return true;
         }
-        lista->A[posicao] = elemento;
-        lista->qntdElementos++;
-        printf("ELEMENTO inserido na posicao %i \n", posicao);
-        return true;
+        else if (!espacoEstaOcupado(lista, posicao)) {
+            lista->A[posicao] = elemento;
+            lista->qntdElementos++;
+            return true;
+        }
+        else {
+            printf("impossivel inserir o elemento de chave %i \n", elemento.chave);
+            return false;
+        }
     }
     else {
         return false;
@@ -100,24 +107,13 @@ bool inserirElementosLista(LISTA* lista, ELEMENTO elemento, int posicao) {
 
 int main() {
     LISTA* lista1 = (LISTA*) malloc(sizeof(LISTA));
-    ELEMENTO elemento1;
-    elemento1.chave = 1;
-    elemento1.valor = 1;
-
-    ELEMENTO elemento2;
-    elemento2.chave = 2;
-    elemento2.valor = 2;
-
     limparElementosLista(lista1);
-
-    inserirElementosLista(lista1, elemento1, 0);
-    inserirElementosLista(lista1, elemento2, 0);
-    inserirElementosLista(lista1, elemento2, 1);
-
-
+    for (int i = 10; i >= 1; i--) { // loop para testar a inserção de elementos 10 vezes.
+        ELEMENTO elemento;
+        elemento.chave = i;
+        elemento.valor = i;
+        inserirElementosLista(lista1, elemento, 0);
+    }
     exibirElementosLista(lista1);
-
-//    int elementoBuscado = buscarElementoLista(lista1, 2);
-//    printf("Elemento buscado: %i", elementoBuscado);
 }
 
