@@ -74,8 +74,7 @@ void inserirFinal(LISTA* l, CHAVE chave) {
         l->ultimo = novoElemento; // O único elemento é o primeiro e o último ao mesmo tempo.
     }
     else {
-        ELEMENTO* ultimo = l->ultimo;
-        ultimo->prox = novoElemento; // último elemento passa a apontar para o novo elemento
+        l->ultimo->prox = novoElemento; // último elemento passa a apontar para o novo elemento
         l->ultimo = novoElemento; // Salva a referência do novo último elemento
     }
 }
