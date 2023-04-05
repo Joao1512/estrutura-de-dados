@@ -23,19 +23,20 @@ void exibirElementosLista(int array[]) {
     return minimumIndex;
 }
 
+// troca o menor elemento com o primeiro elemento.
+void swap (int array[], int start, int indexOfMinimum) {
+    int temp = array[start];
+    array[start] = array[indexOfMinimum];
+    array[indexOfMinimum] = temp;
+}
+
  void selectionSort(int array[]) {
-    int newArr[100] = {};
-     int minElement = 0;
     for (int i = 0; i < 100; i++) {
-        int minIndex = indexMinimumElement(array, i);
-        minElement = array[minIndex];
-        int temp = array[i];
-        array[i] = minElement;
-        array[minIndex] = temp;
+        int indexOfMinimum = indexMinimumElement(array, i); // encontra o menor elemento a partir de i. a comparação fica cada vez menor.
+        swap(array, i, indexOfMinimum);
     }
     exibirElementosLista(array);
 }
-
 
 int main() {
 
@@ -44,7 +45,6 @@ int main() {
                       68, 10, 75, 40, 28, 59, 20, 47, 70, 31, 37, 22, 9, 89, 29, 96, 79, 39, 87, 41,
                       48, 54, 43, 18, 35, 66, 97, 1, 65, 42, 90, 98, 74, 8, 61, 50, 27, 51, 19, 24,
                       69, 60, 36, 2, 58, 45, 13, 94, 5, 88, 6, 81, 63, 83, 4, 82, 84, 100, 93};
-
 
     selectionSort(array);
 }
