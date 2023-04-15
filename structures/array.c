@@ -15,8 +15,8 @@ typedef struct {
     int qntdElementos;
 } LISTA;
 
+// Remove os valores de todos os elementos.
 void limparElementosLista(LISTA* lista) {
-    printf("Inicializando limparLista...\n ");
     lista->qntdElementos = 0;
     for (int i = 0; i < 10; ++i) {
         lista->A[i].valor = -1;
@@ -24,7 +24,7 @@ void limparElementosLista(LISTA* lista) {
     }
 }
 
-
+// Print Sequencial dos elementos. 
 void exibirElementosLista(LISTA* lista) {
     printf("Numero de elementos: %i \n", lista->qntdElementos);
     for (int i = 0; i < lista->qntdElementos; ++i) {
@@ -36,6 +36,7 @@ void exibirElementosLista(LISTA* lista) {
     }
 }
 
+// Pesquisa sequencial que retorna o úndice do primeiro elemento que contem a chave especificada. Retorna -1 caso não encontre.  
 int buscarElementoLista(LISTA* lista, CHAVE chave) {
     printf("iniciando busca por elemento...");
     for (int i = 0; i < lista->qntdElementos; ++i) {
@@ -47,6 +48,7 @@ int buscarElementoLista(LISTA* lista, CHAVE chave) {
     }
 }
 
+// Verifica se há um elemento no índice especificado.
 bool espacoEstaOcupado(LISTA* lista, int posicao) {
     if (lista->A[posicao].valor == -1) {
         return false;
@@ -56,6 +58,7 @@ bool espacoEstaOcupado(LISTA* lista, int posicao) {
     }
 }
 
+// Verifica se o elemento especificado pode ser inserido.
 bool insercaoValida(LISTA* lista, int posicao) {
     if ((lista->qntdElementos >= TAMANHO) || posicao < 0 || posicao >= TAMANHO) {
         printf("Nao e possivel inserir elemento na posicao %i. \n", posicao);
@@ -66,12 +69,14 @@ bool insercaoValida(LISTA* lista, int posicao) {
     }
 }
 
+// Desloca todos os elementos uma casa a direita a partir da posição especificada.
 void empurrarElementos(LISTA* lista, int posicao) {
-    for (int j = lista->qntdElementos; j >= posicao; --j) { // a partir do último elemento, move cada elemento 1 casa a direita.
+    for (int j = lista->qntdElementos; j >= posicao; --j) {
         lista->A[j] = lista->A[j - 1];
     }
 }
 
+// Verifica se  é possível deslocar todos os elementos uma casa a direita a partir da posição especificada.
 bool podeEmpurrar(LISTA* lista, int posicao) {
     if (lista->qntdElementos == TAMANHO) {
         printf("Nao e possivel empurrar, espaco insuficiente \n");
