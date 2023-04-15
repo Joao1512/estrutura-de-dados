@@ -7,35 +7,37 @@ typedef struct {
     struct celula *proximo;
 } celula;
 
-void insere(int conteudo, celula *cabeca) {
+// Insere no inicio da sequência.
+void insere(int conteudo, celula *inicio) {
     celula* nova = (celula*) malloc(sizeof(celula));
     nova->conteudo = conteudo;
-    nova->proximo = cabeca->proximo;
+    nova->proximo = inicio->proximo;
 
-    cabeca->proximo = nova;
+    inicio->proximo = nova;
 }
 
+// Print sequencial das celulas que formam a lista.
 void imprime(celula* cabeca) {
     celula* aux = cabeca;
 
     while (aux->proximo != NULL) {
         aux = aux->proximo;
         printf("\n Conteudo: %i", aux->conteudo);
-
     }
 }
 
+// cria uma lista de 3 celulas com números aleatórios.
 celula criaLista() {
     celula cabeca;
     cabeca.proximo = NULL;
     for (int i = 0; i < 3; ++i) {
         insere(rand(), &cabeca);
     }
-    imprime(&cabeca);
     printf("\n --------");
     return cabeca;
 }
 
+// Concatena a primeira celula na segunda celula.
 void concatena(celula *cabeca1, celula *cabeca2) {
     celula* aux = cabeca1;
     aux = aux->proximo;
