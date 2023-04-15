@@ -12,6 +12,7 @@ typedef struct {
     struct NO *fim;
 }FILA;
 
+// Cria um elemento no fim da fila para guardar o dado especificado.
 void adicionar(int dado, FILA *f) {
     // =======================================
     NO* nova = (NO*) malloc(sizeof (NO));
@@ -33,6 +34,7 @@ void adicionar(int dado, FILA *f) {
     f->fim = nova;
 }
 
+//Busca sequencial que retorna o índice do elemento que contem o dado especificado;
 int buscar(int dado, FILA *f) {
     NO* aux = f->ini;
     int count = 0;
@@ -45,23 +47,27 @@ int buscar(int dado, FILA *f) {
     return -1;
 }
 
+// Remove o primeiro elemento da fila.
 bool remover(FILA *f) {
     if (f->ini == NULL) return false;
     NO* aux = f->ini;
     f->ini = f->ini->prox;
     if (f->ini == NULL) f->fim = NULL;
+    free(aux);
     return true;
 }
 
+// remove todos so elementos da fila.
 bool reinicializarFila(FILA *f) {
     NO* aux = f->ini;
     while (aux != NULL) {
-        NO* apagar = aux; // apagar recebe 123
-        aux = aux->prox; //aux recebe 456
-        free(apagar); // apaga 123
+        NO* apagar = aux;
+        aux = aux->prox;
+        free(apagar);
     }
 }
 
+// Print sequencial dos elementos da fila.
 void visualizarFila(FILA *f) {
     NO* aux = f->ini;
     while (aux != NULL) {
@@ -70,6 +76,7 @@ void visualizarFila(FILA *f) {
     }
 }
 
+// Retorna a quantidade de elementos na fila.
 int tamanhoFila(FILA *f) {
     int count = 0;
     NO* aux = f->ini;
