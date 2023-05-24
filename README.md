@@ -34,6 +34,15 @@ That is my on C implementations for Arrays, LinkedList, Queue and others data st
 - **print**() - prints all items.
 - **indexOf**(item) - get the index of first occurrence of item.
 
+## 💻 Sorting
+
+- **quickSort**()
+- **selectionSort**()
+
+## 💻 Search
+
+- **binarySearh** - recursive and iterative.
+
 ## 🗒️ Note:
 
 **This repository is a work in progress, and I will post more lines of code over time with more data structures and improvements to existing ones.**
